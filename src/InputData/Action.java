@@ -8,6 +8,7 @@ public class Action {
     private String type;
     private String page;
     private String feature;
+    private Filters filters;
     private String startsWith;
     private Credentials credentials;
     private static Map<String, AllPagesEnum> pageEnum = new HashMap<String, AllPagesEnum>() {{
@@ -20,6 +21,7 @@ public class Action {
         put("upgrades", AllPagesEnum.Updgrades);
         put("logout", AllPagesEnum.Logout);
     }};
+
     private Map<String, AllFeaturesEnum> featureEnum = new HashMap<String, AllFeaturesEnum>() {{
         put("login", AllFeaturesEnum.Login);
         put("register", AllFeaturesEnum.Register);
@@ -27,7 +29,6 @@ public class Action {
         put("filter", AllFeaturesEnum.Filter);
         put("logout", AllFeaturesEnum.Logout);
     }};
-
 
     public String getType() {
         return type;
@@ -83,5 +84,13 @@ public class Action {
 
     public void setStartsWith(String startsWith) {
         this.startsWith = startsWith;
+    }
+
+    public Filters getFilters() {
+        return filters;
+    }
+
+    public void setFilters(Filters filters) {
+        this.filters = filters;
     }
 }

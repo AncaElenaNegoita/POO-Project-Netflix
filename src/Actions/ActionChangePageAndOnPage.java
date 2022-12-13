@@ -21,8 +21,9 @@ public abstract class ActionChangePageAndOnPage {
             CopyMovieList.getInstance().setOk(0);
             return FactoryChangePageAndOnPage.getInstance().getState(AllPagesEnum.UnauthenticatedHomePage);
         }
-        if (page.equals("movies")) {
-            UserActions.filteredMovieList = Actions.CopyMovieList.getInstance().getCopiedList(Input.getInstance().getMovies());
+        if (page.equals("movies") && UserActions.currentUser.getCredentials() != null) {
+            UserActions.filteredMovieList =
+                    Actions.CopyMovieList.getInstance().getCopiedList(Input.getInstance().getMovies());
         }
         var nextPage = action.getPageEnum().get(page);
         if (nextStates.contains(nextPage)) {

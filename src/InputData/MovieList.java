@@ -14,7 +14,7 @@ public class MovieList implements PrototypeMovie{
     private ArrayList<String> countriesBanned = new ArrayList<>();
     private int numLikes;
     private double rating = 0.00;
-    private int numRating;
+    private int numRatings;
 
     public String getName() {
         return name;
@@ -80,12 +80,12 @@ public class MovieList implements PrototypeMovie{
         this.rating = rating;
     }
 
-    public int getNumRating() {
-        return numRating;
+    public int getNumRatings() {
+        return numRatings;
     }
 
-    public void setNumRating(int numRating) {
-        this.numRating = numRating;
+    public void setNumRatings(int numRatings) {
+        this.numRatings = numRatings;
     }
 
     public MovieList() {

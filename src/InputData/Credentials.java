@@ -1,5 +1,7 @@
 package InputData;
 
+import java.util.Objects;
+
 public class Credentials {
     private String name;
     private String password;
@@ -59,5 +61,13 @@ public class Credentials {
 
     public void setBalance(String balance) {
         this.balance = balance;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Credentials that = (Credentials) o;
+        return Objects.equals(getName(), that.getName()) && Objects.equals(getPassword(), that.getPassword());
     }
 }
