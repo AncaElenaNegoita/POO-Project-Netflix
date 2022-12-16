@@ -1,14 +1,10 @@
 package InputData;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.util.ArrayList;
 
-@JsonIgnoreProperties({"userMovies"})
 public class User {
     static final int FREEPREMIUMMOVIES = 15;
     private Credentials credentials;
-    private ArrayList<MovieList> userMovies = new ArrayList<>();
     private int tokensCount;
     private int numFreePremiumMovies = FREEPREMIUMMOVIES;
     private ArrayList<MovieList> purchasedMovies = new ArrayList<>();
@@ -22,7 +18,12 @@ public class User {
 
     public User(User user) {
         this.credentials = user.getCredentials();
-        this.userMovies = user.getUserMovies();
+        this.tokensCount = user.getTokensCount();
+        this.numFreePremiumMovies = user.getNumFreePremiumMovies();
+        this.purchasedMovies = user.getPurchasedMovies();
+        this.watchedMovies = user.getWatchedMovies();
+        this.likedMovies = user.getLikedMovies();
+        this.ratedMovies = user.getRatedMovies();
     }
 
     public Credentials getCredentials() {
@@ -31,14 +32,6 @@ public class User {
 
     public void setCredentials(Credentials userCredentials) {
         this.credentials = userCredentials;
-    }
-
-    public ArrayList<MovieList> getUserMovies() {
-        return userMovies;
-    }
-
-    public void setUserMovies(ArrayList<MovieList> userMovies) {
-        this.userMovies = userMovies;
     }
 
     public int getTokensCount() {

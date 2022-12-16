@@ -5,43 +5,31 @@ import InputData.MovieList;
 import java.util.ArrayList;
 
 public class CopyMovieList {
-    private int ok;
     private static CopyMovieList instance = null;
 
     public ArrayList<MovieList> getCopiedList (ArrayList<MovieList> movieInputList) {
         ArrayList<MovieList> copyList = new ArrayList<>();
+        int ok = 0;
         for (MovieList movie : movieInputList) {
-            MovieList movieCopy = (MovieList)movie.getClone();
-            for (String country :  movieCopy.getCountriesBanned()) {
+            MovieList movieCopy = (MovieList) movie.getClone();
+            ok = 0;
+            for (String country : movieCopy.getCountriesBanned()) {
                 if (UserActions.currentUser.getCredentials().getCountry().equals(country)) {
-                    this.setOk(1);
-                }
-                if (this.getOk() == 0) {
-                    copyList.add(movieCopy);
+                    ok = 1;
+                    break;
                 }
             }
-            this.setOk(0);
+            if (ok == 0) {
+                copyList.add(movieCopy);
+            }
         }
-        this.setOk(1);
         return copyList;
-    }
-
-    private CopyMovieList(int ok) {
-        this.ok = ok;
     }
 
     public static CopyMovieList getInstance() {
         if (instance == null) {
-            instance = new CopyMovieList(0);
+            instance = new CopyMovieList();
         }
         return instance;
-    }
-
-    public int getOk() {
-        return ok;
-    }
-
-    public void setOk(int ok) {
-        this.ok = ok;
     }
 }

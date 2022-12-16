@@ -11,14 +11,17 @@ public class Action {
     private Filters filters;
     private String startsWith;
     private Credentials credentials;
-    private static Map<String, AllPagesEnum> pageEnum = new HashMap<String, AllPagesEnum>() {{
+    private String movie;
+    private String count;
+    private double rate;
+    private static Map<String, AllPagesEnum> pageEnum = new HashMap<>() {{
         put("unauthenticated homepage", AllPagesEnum.UnauthenticatedHomePage);
         put("login", AllPagesEnum.Login);
         put("register", AllPagesEnum.Register);
         put("authenticated homepage", AllPagesEnum.AuthenticatedHomePage);
         put("movies", AllPagesEnum.Movies);
         put("see details", AllPagesEnum.SeeDetails);
-        put("upgrades", AllPagesEnum.Updgrades);
+        put("upgrades", AllPagesEnum.Upgrades);
         put("logout", AllPagesEnum.Logout);
     }};
 
@@ -27,6 +30,12 @@ public class Action {
         put("register", AllFeaturesEnum.Register);
         put("search", AllFeaturesEnum.Search);
         put("filter", AllFeaturesEnum.Filter);
+        put("purchase", AllFeaturesEnum.Purchase);
+        put("watch", AllFeaturesEnum.Watch);
+        put("like", AllFeaturesEnum.Like);
+        put("rate", AllFeaturesEnum.RateTheMovie);
+        put("buy tokens", AllFeaturesEnum.BuyTokens);
+        put("buy premium account", AllFeaturesEnum.BuyPremiumAccount);
         put("logout", AllFeaturesEnum.Logout);
     }};
 
@@ -92,5 +101,29 @@ public class Action {
 
     public void setFilters(Filters filters) {
         this.filters = filters;
+    }
+
+    public String getMovie() {
+        return movie;
+    }
+
+    public void setMovie(String movie) {
+        this.movie = movie;
+    }
+
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
     }
 }

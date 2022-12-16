@@ -6,7 +6,7 @@ public enum AllPagesEnum {
     Register,
     AuthenticatedHomePage,
     Movies,
-    Updgrades,
+    Upgrades,
     SeeDetails,
     Logout
 }

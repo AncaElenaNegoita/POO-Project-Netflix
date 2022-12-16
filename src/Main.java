@@ -10,7 +10,6 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        //Input inputData = objectMapper.readValue(new File(args[0]), Input.class);
         Input.setInstance(objectMapper.readValue(new File(args[0]), Input.class));
         Input inputData = Input.getInstance();
 

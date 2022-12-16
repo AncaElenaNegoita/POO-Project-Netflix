@@ -15,6 +15,7 @@ public class Register extends ActionChangePageAndOnPage {
     public ActionChangePageAndOnPage register(Action action) {
         Input listUsers = Input.getInstance();
         User addUser = new User();
+        UserActions.positionUser = listUsers.getUsers().size();
         addUser.setCredentials(action.getCredentials());
         UserActions.currentUser = addUser;
         listUsers.getUsers().add(addUser);

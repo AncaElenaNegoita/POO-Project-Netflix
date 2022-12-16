@@ -6,5 +6,10 @@ public enum AllFeaturesEnum {
     Filter,
     Search,
     Purchase,
+    Watch,
+    Like,
+    RateTheMovie,
+    BuyPremiumAccount,
+    BuyTokens,
     Logout
 }

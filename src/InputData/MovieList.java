@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.ArrayList;
 
-@JsonIgnoreProperties({"clone"})
+@JsonIgnoreProperties({"clone", "ratingList", "okPurchase", "okWatch"})
 public class MovieList implements PrototypeMovie{
     private String name;
     private int year;
@@ -15,6 +15,9 @@ public class MovieList implements PrototypeMovie{
     private int numLikes;
     private double rating = 0.00;
     private int numRatings;
+    private ArrayList<Double> ratingList = new ArrayList<>();
+    private int okPurchase;
+    private int okWatch;
 
     public String getName() {
         return name;
@@ -88,23 +91,56 @@ public class MovieList implements PrototypeMovie{
         this.numRatings = numRatings;
     }
 
+    public ArrayList<Double> getRatingList() {
+        return ratingList;
+    }
+
+    public void setRatingList(ArrayList<Double> ratingList) {
+        this.ratingList = ratingList;
+    }
+
+    public int getOkPurchase() {
+        return okPurchase;
+    }
+
+    public void setOkPurchase(int okPurchase) {
+        this.okPurchase = okPurchase;
+    }
+
+    public int getOkWatch() {
+        return okWatch;
+    }
+
+    public void setOkWatch(int okWatch) {
+        this.okWatch = okWatch;
+    }
+
     public MovieList() {
 
     }
 
     public MovieList(String name, int year, int duration, ArrayList<String> genres,
-                     ArrayList<String> actors, ArrayList<String> countriesBanned) {
+                     ArrayList<String> actors, ArrayList<String> countriesBanned, int numLikes,
+                     double rating, int numRatings, ArrayList<Double> ratingList, int okPurchase,
+                     int okWatch) {
         this.name = name;
         this.year = year;
         this.duration = duration;
         this.genres = genres;
         this.actors = actors;
         this.countriesBanned = countriesBanned;
+        this.numLikes = numLikes;
+        this.rating = rating;
+        this.numRatings = numRatings;
+        this.ratingList = ratingList;
+        this.okPurchase = okPurchase;
+        this.okWatch = okWatch;
     }
 
     // Prototype Design Pattern
     @Override
     public PrototypeMovie getClone() {
-        return new MovieList(name, year, duration, genres, actors, countriesBanned);
+        return new MovieList(name, year, duration, genres, actors, countriesBanned, numLikes,
+                rating, numRatings, ratingList, okPurchase, okWatch);
     }
 }

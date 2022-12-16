@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import static java.util.Collections.swap;
 
 public class Movies extends ActionChangePageAndOnPage {
-    public Movies () {
+    public Movies() {
         this.nextStates.add(AllPagesEnum.AuthenticatedHomePage);
         this.nextStates.add(AllPagesEnum.Movies);
         this.nextStates.add(AllPagesEnum.SeeDetails);
@@ -20,14 +20,21 @@ public class Movies extends ActionChangePageAndOnPage {
     }
 
     public ActionChangePageAndOnPage search(Action action) {
+        UserActions.filteredMovieList =
+                Actions.CopyMovieList.getInstance().getCopiedList(Input.getInstance().getMovies());
+
         ArrayList<MovieList> copyList = new ArrayList<>();
+        if (UserActions.filteredMovieList.isEmpty()) {
+            return FactoryChangePageAndOnPage.getInstance().getState(AllPagesEnum.Movies);
+        }
         for (MovieList movie : UserActions.filteredMovieList) {
-            MovieList movieCopy = (MovieList)movie.getClone();
+            MovieList movieCopy = (MovieList) movie.getClone();
             copyList.add(movieCopy);
         }
         UserActions.filteredMovieList = new ArrayList<>();
         for (MovieList movie : copyList) {
             if (movie.getName().startsWith(action.getStartsWith())) {
+                System.out.println("l am gasit");
                 UserActions.filteredMovieList.add(movie);
             }
         }
@@ -35,7 +42,19 @@ public class Movies extends ActionChangePageAndOnPage {
     }
 
     public ActionChangePageAndOnPage filter(Action action) {
+        System.out.println(Input.getInstance().getMovies().size());
+        UserActions.filteredMovieList =
+                Actions.CopyMovieList.getInstance().getCopiedList(Input.getInstance().getMovies());
+
+        System.out.println(UserActions.filteredMovieList.size());
+
+        if (UserActions.filteredMovieList.isEmpty()) {
+            System.out.println("lista e goala");
+            return FactoryChangePageAndOnPage.getInstance().getState(AllPagesEnum.Movies);
+        }
+
         Sort sort = action.getFilters().getSort();
+        Contains contains = action.getFilters().getContains();
         if (sort != null) {
             int size = UserActions.filteredMovieList.size();
             if (!sort.getRating().isEmpty()) {
@@ -78,9 +97,69 @@ public class Movies extends ActionChangePageAndOnPage {
                     }
                     if (k != i) {
                         swap(UserActions.filteredMovieList, i, k);
+                        System.out.println(UserActions.filteredMovieList.get(i).getName());
                     }
                 }
             }
+        }
+
+        if (contains != null) {
+            int ok = 0;
+            int notFound = 0;
+            ArrayList<MovieList> copyMovies = new ArrayList<>();
+
+            if (action.getFilters().getContains().getActors() != null) {
+                for (MovieList movie : UserActions.filteredMovieList) {
+                    for (String actorFilter : action.getFilters().getContains().getActors()) {
+                        for (String actorMovie : movie.getActors()) {
+                            if (actorMovie.equals(actorFilter)) {
+                                ok = 1;
+                                break;
+                            }
+                        }
+                        if (ok != 1) {
+                            notFound = 1;
+                            break;
+                        } else {
+                            ok = 0;
+                        }
+                    }
+                    if (notFound == 0) {
+                        copyMovies.add(movie);
+                    } else {
+                        notFound = 0;
+                    }
+                }
+                UserActions.filteredMovieList = copyMovies;
+            }
+            ok = 0;
+            notFound = 0;
+
+            if (action.getFilters().getContains().getGenres() != null) {
+                for (MovieList movie : UserActions.filteredMovieList) {
+                    for (String genreFilter : action.getFilters().getContains().getGenres()) {
+                        for (String genreMovie : movie.getGenres()) {
+                            if (genreMovie.equals(genreFilter)) {
+                                ok = 1;
+                                break;
+                            }
+                        }
+                        if (ok != 1) {
+                            notFound = 1;
+                            break;
+                        } else {
+                            ok = 0;
+                        }
+
+                    }
+                    if (notFound == 0) {
+                        copyMovies.add(movie);
+                    } else {
+                        notFound = 0;
+                    }
+                }
+            }
+            UserActions.filteredMovieList = copyMovies;
         }
         return FactoryChangePageAndOnPage.getInstance().getState(AllPagesEnum.Movies);
     }

@@ -23,8 +23,8 @@ public final class FactoryChangePageAndOnPage {
         stateCreators.put(AllPagesEnum.Register, () -> new Register());
         stateCreators.put(AllPagesEnum.AuthenticatedHomePage, () -> new AuthenticatedHomePage());
         stateCreators.put(AllPagesEnum.Movies, () -> new Movies());
-        stateCreators.put(AllPagesEnum.SeeDetails, () -> new Register());
-        stateCreators.put(AllPagesEnum.Updgrades, () -> new AuthenticatedHomePage());
+        stateCreators.put(AllPagesEnum.SeeDetails, () -> new SeeDetails());
+        stateCreators.put(AllPagesEnum.Upgrades, () -> new Upgrades());
         stateCreators.put(AllPagesEnum.Logout, () -> new Logout());
     }
 
