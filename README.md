@@ -64,6 +64,33 @@ successful(except login and register), or an error.
 Also, the movies need to be available in the country of the user.
 - in see details, a user can purchase, watch, like and rate a movie. He can only watch
 if he has purchased it (or has premium account, thus he has 15 free movies). He can like
-and rate if he has watched the movie.
+and rate if he has watched the movie. If the user likes a movie, then in an array generated at the 
+beginning of the program will be stored the genre and the number of likes received. To be more precised, all the
+genres that a movie contains will receive +1 like, and the array will be resorted if necesarry so as to have the most
+liked genre on the first position. Also, a user can subscribe to a genre in order to receive notifications
+when a new movie comes out and includes that genre.
 - in upgrades, the user can buy a premium account or tokens because this is the currency on the app
 
+In database, there are 2 possible cases:
+- a new movie can be added, in which case the database that contains movies will be verified
+in order to see if the movie already exists. If not, the movie will be added at the end of the array, and
+each user subscribed to at least one of the movie's genre will receive a notification that a new movie was added if
+it can be seen in its country.
+- a movie already existent can be deleted from the database if it exists in it. Like add, each user subscribed 
+to at least one of the movie's genre will receive a notification that the movie was eliminated from the
+database.
+
+The array of notifications from each user is updated and can be seen when a user logs in.
+
+At the end of the program, if a premium user is still connected, he will get a recommendation of a
+film that wasn't watched and contains the most liked genre of the user. The program will print the recommendation
+and, if no movie is found, a specific message is shown.("No recommendation")
+In order to do so, the array that contains the genre and its number of likes will be used and
+each element will be verified in order to find an unwatched movie. Because the array is already sorted, it just needs
+to be run through it.
+
+The Design Pattern used are:
+- Singleton Design Pattern
+- Factory Design Pattern
+- State Design Pattern
+- Prototype Design Pattern

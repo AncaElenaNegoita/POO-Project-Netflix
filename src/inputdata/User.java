@@ -1,7 +1,10 @@
 package inputdata;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.ArrayList;
 
+@JsonIgnoreProperties({"subscribedGenres", "likedGenres"})
 public final class User {
     static final int FREEPREMIUMMOVIES = 15;
     private Credentials credentials;
@@ -11,6 +14,9 @@ public final class User {
     private ArrayList<MovieList> watchedMovies = new ArrayList<>();
     private ArrayList<MovieList> likedMovies = new ArrayList<>();
     private ArrayList<MovieList> ratedMovies = new ArrayList<>();
+    private ArrayList<Notification> notifications = new ArrayList<>();
+    private ArrayList<String> subscribedGenres = new ArrayList<>();
+    private ArrayList<GenreList> likedGenres = new ArrayList<>();
 
     public User() {
         this.credentials = null;
@@ -24,6 +30,7 @@ public final class User {
         this.watchedMovies = user.getWatchedMovies();
         this.likedMovies = user.getLikedMovies();
         this.ratedMovies = user.getRatedMovies();
+        this.notifications = user.getNotifications();
     }
 
     public Credentials getCredentials() {
@@ -80,5 +87,29 @@ public final class User {
 
     public void setRatedMovies(final ArrayList<MovieList> ratedMovies) {
         this.ratedMovies = ratedMovies;
+    }
+
+    public ArrayList<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(final ArrayList<Notification> notifications) {
+        this.notifications = notifications;
+    }
+
+    public ArrayList<String> getSubscribedGenres() {
+        return subscribedGenres;
+    }
+
+    public void setSubscribedGenres(final ArrayList<String> subscribedGenres) {
+        this.subscribedGenres = subscribedGenres;
+    }
+
+    public ArrayList<GenreList> getLikedGenres() {
+        return likedGenres;
+    }
+
+    public void setLikedGenres(final ArrayList<GenreList> likedGenres) {
+        this.likedGenres = likedGenres;
     }
 }

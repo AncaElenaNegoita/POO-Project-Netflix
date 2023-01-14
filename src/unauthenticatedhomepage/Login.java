@@ -21,28 +21,29 @@ public class Login extends ActionChangePageAndOnPage {
     /**
      * This function verifies if the credentials from the action corespond to the ones in the
      * user array from the input
+     *
      * @param action - where the credentials are
      * @return - the state of the authenticated page if successful
      */
     public ActionChangePageAndOnPage login(final Action action) {
-        int ok = 0;
         ArrayList<User> listUsers = Input.getInstance().getUsers();
 
         for (int i = 0; i < listUsers.size(); i++) {
             if (listUsers.get(i).getCredentials().equals(action.getCredentials())) {
                 UserActions.currentUser = listUsers.get(i);
                 UserActions.positionUser = i;
-                ok = 1;
-                break;
+                if (UserActions.verifyDoAction == 1) {
+                    UserActions.nameOfPages.add("authenticatedHomePage");
+                    UserActions.stackOfPages.add(FactoryChangePageAndOnPage.getInstance().
+                            getState(AllPagesEnum.AuthenticatedHomePage));
+                }
+                return FactoryChangePageAndOnPage.getInstance().
+                        getState(AllPagesEnum.AuthenticatedHomePage);
             }
         }
-        if (ok == 1) {
-            return FactoryChangePageAndOnPage.getInstance().
-                    getState(AllPagesEnum.AuthenticatedHomePage);
-        } else {
-            UserActions.currentPage = FactoryChangePageAndOnPage.getInstance().
-                    getState(AllPagesEnum.UnauthenticatedHomePage);
-            return null;
-        }
+        UserActions.currentPage = FactoryChangePageAndOnPage.getInstance().
+                getState(AllPagesEnum.UnauthenticatedHomePage);
+        return null;
     }
 }
+

@@ -9,7 +9,10 @@ public enum AllFeaturesEnum {
     Watch,
     Like,
     RateTheMovie,
+    Subscribe,
     BuyPremiumAccount,
     BuyTokens,
+    DatabaseAdd,
+    DatabaseDelete,
     Logout
 }

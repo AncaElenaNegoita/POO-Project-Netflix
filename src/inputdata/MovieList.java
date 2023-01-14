@@ -7,7 +7,7 @@ import java.util.ArrayList;
 @JsonIgnoreProperties({"clone", "ratingList", "okPurchase", "okWatch"})
 public final class MovieList implements PrototypeMovie {
     private String name;
-    private int year;
+    private String year;
     private int duration;
     private ArrayList<String> genres = new ArrayList<>();
     private ArrayList<String> actors = new ArrayList<>();
@@ -16,8 +16,10 @@ public final class MovieList implements PrototypeMovie {
     private double rating = 0.00;
     private int numRatings;
     private ArrayList<Double> ratingList = new ArrayList<>();
-    private int okPurchase;
-    private int okWatch;
+    private ArrayList<Integer> okPurchase = new ArrayList<>();
+    private ArrayList<Integer> okWatch = new ArrayList<>();
+    private ArrayList<Integer> okLike = new ArrayList<>();
+    private ArrayList<Integer> okRate = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -27,11 +29,11 @@ public final class MovieList implements PrototypeMovie {
         this.name = name;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(final int year) {
+    public void setYear(final String year) {
         this.year = year;
     }
 
@@ -99,31 +101,49 @@ public final class MovieList implements PrototypeMovie {
         this.ratingList = ratingList;
     }
 
-    public int getOkPurchase() {
+    public ArrayList<Integer> getOkPurchase() {
         return okPurchase;
     }
 
-    public void setOkPurchase(final int okPurchase) {
+    public void setOkPurchase(final ArrayList<Integer> okPurchase) {
         this.okPurchase = okPurchase;
     }
 
-    public int getOkWatch() {
+    public ArrayList<Integer> getOkWatch() {
         return okWatch;
     }
 
-    public void setOkWatch(final int okWatch) {
+    public void setOkWatch(final ArrayList<Integer> okWatch) {
         this.okWatch = okWatch;
+    }
+
+    public ArrayList<Integer> getOkLike() {
+        return okLike;
+    }
+
+    public void setOkLike(final ArrayList<Integer> okLike) {
+        this.okLike = okLike;
+    }
+
+    public ArrayList<Integer> getOkRate() {
+        return okRate;
+    }
+
+    public void setOkRate(final ArrayList<Integer> okRate) {
+        this.okRate = okRate;
     }
 
     public MovieList() {
 
     }
 
-    public MovieList(final String name, final int year, final int duration,
+    public MovieList(final String name, final String year, final int duration,
                      final ArrayList<String> genres, final ArrayList<String> actors,
                      final ArrayList<String> countriesBanned, final int numLikes,
                      final double rating, final int numRatings,
-                     final ArrayList<Double> ratingList, final int okPurchase, final int okWatch) {
+                     final ArrayList<Double> ratingList, final ArrayList<Integer> okPurchase,
+                     final ArrayList<Integer> okWatch, final ArrayList<Integer> okLike,
+                     final ArrayList<Integer> okRate) {
         this.name = name;
         this.year = year;
         this.duration = duration;
@@ -136,6 +156,8 @@ public final class MovieList implements PrototypeMovie {
         this.ratingList = ratingList;
         this.okPurchase = okPurchase;
         this.okWatch = okWatch;
+        this.okLike = okLike;
+        this.okRate = okRate;
     }
 
     // Prototype Design Pattern
@@ -147,6 +169,6 @@ public final class MovieList implements PrototypeMovie {
     @Override
     public PrototypeMovie getClone() {
         return new MovieList(name, year, duration, genres, actors, countriesBanned, numLikes,
-                rating, numRatings, ratingList, okPurchase, okWatch);
+                rating, numRatings, ratingList, okPurchase, okWatch, okLike, okRate);
     }
 }

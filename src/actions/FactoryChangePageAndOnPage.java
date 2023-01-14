@@ -25,14 +25,14 @@ public final class FactoryChangePageAndOnPage {
     private FactoryChangePageAndOnPage() {
         stateCreators = new HashMap<>();
         stateCreators.put(AllPagesEnum.UnauthenticatedHomePage,
-                () -> new UnauthenticatedHomePage());
-        stateCreators.put(AllPagesEnum.Login, () -> new Login());
-        stateCreators.put(AllPagesEnum.Register, () -> new Register());
-        stateCreators.put(AllPagesEnum.AuthenticatedHomePage, () -> new AuthenticatedHomePage());
-        stateCreators.put(AllPagesEnum.Movies, () -> new Movies());
-        stateCreators.put(AllPagesEnum.SeeDetails, () -> new SeeDetails());
-        stateCreators.put(AllPagesEnum.Upgrades, () -> new Upgrades());
-        stateCreators.put(AllPagesEnum.Logout, () -> new Logout());
+                UnauthenticatedHomePage::new);
+        stateCreators.put(AllPagesEnum.Login, Login::new);
+        stateCreators.put(AllPagesEnum.Register, Register::new);
+        stateCreators.put(AllPagesEnum.AuthenticatedHomePage, AuthenticatedHomePage::new);
+        stateCreators.put(AllPagesEnum.Movies, Movies::new);
+        stateCreators.put(AllPagesEnum.SeeDetails, SeeDetails::new);
+        stateCreators.put(AllPagesEnum.Upgrades, Upgrades::new);
+        stateCreators.put(AllPagesEnum.Logout, Logout::new);
     }
 
     // Singleton Design Pattern
@@ -47,7 +47,6 @@ public final class FactoryChangePageAndOnPage {
         if (instance == null) {
             instance = new FactoryChangePageAndOnPage();
         }
-
         return instance;
     }
 

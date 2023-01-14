@@ -13,6 +13,9 @@ public final class Action {
     private String movie;
     private String count;
     private double rate;
+    private MovieList addedMovie;
+    private String subscribedGenre;
+    private String deletedMovie;
     private static Map<String, AllPagesEnum> pageEnum = new HashMap<>() {{
         put("unauthenticated homepage", AllPagesEnum.UnauthenticatedHomePage);
         put("login", AllPagesEnum.Login);
@@ -33,8 +36,11 @@ public final class Action {
         put("watch", AllFeaturesEnum.Watch);
         put("like", AllFeaturesEnum.Like);
         put("rate", AllFeaturesEnum.RateTheMovie);
+        put("subscribe", AllFeaturesEnum.Subscribe);
         put("buy tokens", AllFeaturesEnum.BuyTokens);
         put("buy premium account", AllFeaturesEnum.BuyPremiumAccount);
+        put("database add", AllFeaturesEnum.DatabaseAdd);
+        put("database delete", AllFeaturesEnum.DatabaseDelete);
         put("logout", AllFeaturesEnum.Logout);
     }};
 
@@ -124,5 +130,33 @@ public final class Action {
 
     public void setRate(final double rate) {
         this.rate = rate;
+    }
+
+    public MovieList getAddedMovie() {
+        return addedMovie;
+    }
+
+    public void setAddedMovie(final MovieList addedMovie) {
+        this.addedMovie = addedMovie;
+    }
+
+    public String getSubscribedGenre() {
+        return subscribedGenre;
+    }
+
+    public void setSubscribedGenre(final String subscribedGenre) {
+        this.subscribedGenre = subscribedGenre;
+    }
+
+    public String getDeletedMovie() {
+        return deletedMovie;
+    }
+
+    public void setDeletedMovie(final String deletedMovie) {
+        this.deletedMovie = deletedMovie;
+    }
+
+    public Action() {
+
     }
 }

@@ -29,12 +29,13 @@ public abstract class ActionChangePageAndOnPage {
      *               where it wants to go.(It will be verified if it is possible to go there)
      * @return - the state of the next page
      */
-    public ActionChangePageAndOnPage changePage(final Action action) {
-        String page = action.getPage();
+    public ActionChangePageAndOnPage changePage(final Action action,final String page) {
         if (page.equals("logout") && UserActions.currentUser.getCredentials() != null) {
             if (UserActions.verifyDoAction == 1) {
                 UserActions.currentUser = new User();
                 UserActions.filteredMovieList = new ArrayList<>();
+                UserActions.stackOfPages = new ArrayList<>();
+                UserActions.nameOfPages = new ArrayList<>();
             }
             return FactoryChangePageAndOnPage.getInstance().
                     getState(AllPagesEnum.UnauthenticatedHomePage);
@@ -45,6 +46,7 @@ public abstract class ActionChangePageAndOnPage {
                             getCopiedList(Input.getInstance().getMovies());
         }
         if (page.equals("see details")) {
+            UserActions.seeDetailAction.setMovie(action.getMovie());
             MovieList copyMovie = new MovieList();
             if (UserActions.filteredMovieList.isEmpty()) {
                 return null;
@@ -73,7 +75,7 @@ public abstract class ActionChangePageAndOnPage {
                 }
 
         }
-        var nextPage = action.getPageEnum().get(page);
+        var nextPage = Action.getPageEnum().get(page);
         if (nextStates.contains(nextPage)) {
             return FactoryChangePageAndOnPage.getInstance().getState(nextPage);
         }

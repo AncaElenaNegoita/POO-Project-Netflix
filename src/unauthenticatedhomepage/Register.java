@@ -25,10 +25,23 @@ public class Register extends ActionChangePageAndOnPage {
     public ActionChangePageAndOnPage register(final Action action) {
         Input listUsers = Input.getInstance();
         User addUser = new User();
-        UserActions.positionUser = listUsers.getUsers().size();
+
+        if (UserActions.verifyDoAction == 1) {
         addUser.setCredentials(action.getCredentials());
-        UserActions.currentUser = addUser;
         listUsers.getUsers().add(addUser);
+        UserActions.positionUser = listUsers.getUsers().size() - 1;
+        UserActions.currentUser = addUser;
+            for (int j = 0; j < Input.getInstance().getMovies().size(); j++) {
+                Input.getInstance().getMovies().get(j).getOkPurchase().add(0);
+                Input.getInstance().getMovies().get(j).getOkWatch().add(0);
+                Input.getInstance().getMovies().get(j).getOkLike().add(0);
+                Input.getInstance().getMovies().get(j).getOkRate().add(0);
+                Input.getInstance().getMovies().get(j).getRatingList().add(0.00);
+            }
+            UserActions.nameOfPages.add("authenticatedHomePage");
+            UserActions.stackOfPages.add(FactoryChangePageAndOnPage.getInstance().
+                    getState(AllPagesEnum.AuthenticatedHomePage));
+        }
         return FactoryChangePageAndOnPage.getInstance().
                 getState(AllPagesEnum.AuthenticatedHomePage);
     }

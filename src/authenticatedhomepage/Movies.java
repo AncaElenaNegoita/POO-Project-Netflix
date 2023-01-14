@@ -1,9 +1,9 @@
 package authenticatedhomepage;
 
 import actions.ActionChangePageAndOnPage;
-import actions.CopyMovieList;
-import actions.FactoryChangePageAndOnPage;
 import actions.UserActions;
+import actions.FilterAction;
+import actions.FactoryChangePageAndOnPage;
 import inputdata.Action;
 import inputdata.AllFeaturesEnum;
 import inputdata.AllPagesEnum;
@@ -103,65 +103,14 @@ public class Movies extends ActionChangePageAndOnPage {
         }
 
         if (contains != null) {
-            int ok = 0;
-            int notFound = 0;
-            ArrayList<MovieList> copyMovies = new ArrayList<>();
-
             if (action.getFilters().getContains().getActors() != null) {
-                for (MovieList movie : UserActions.filteredMovieList) {
-                    for (String actorFilter : action.getFilters().getContains().getActors()) {
-                        for (String actorMovie : movie.getActors()) {
-                            if (actorMovie.equals(actorFilter)) {
-                                ok = 1;
-                                break;
-                            }
-                        }
-                        if (ok != 1) {
-                            notFound = 1;
-                            break;
-                        } else {
-                            ok = 0;
-                        }
-                    }
-                    if (notFound == 0) {
-                        copyMovies.add(movie);
-                    } else {
-                        notFound = 0;
-                    }
-                }
-                UserActions.filteredMovieList = CopyMovieList.getInstance().
-                        getCopiedList(copyMovies);
+                FilterAction.filterActor(action);
             }
-            ok = 0;
-            notFound = 0;
 
 
             if (action.getFilters().getContains().getGenre() != null) {
-                copyMovies = new ArrayList<>();
-                for (MovieList movie : UserActions.filteredMovieList) {
-                    for (String genreFilter : action.getFilters().getContains().getGenre()) {
-                        for (String genreMovie : movie.getGenres()) {
-                            if (genreMovie.equals(genreFilter)) {
-                                ok = 1;
-                                break;
-                            }
-                        }
-                        if (ok != 1) {
-                            notFound = 1;
-                            break;
-                        } else {
-                            ok = 0;
-                        }
-
-                    }
-                    if (notFound == 0) {
-                        copyMovies.add(movie);
-                    } else {
-                        notFound = 0;
-                    }
-                }
+                FilterAction.filterGenre(action);
             }
-            UserActions.filteredMovieList = CopyMovieList.getInstance().getCopiedList(copyMovies);
         }
         return FactoryChangePageAndOnPage.getInstance().getState(AllPagesEnum.Movies);
     }
